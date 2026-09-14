@@ -21,7 +21,7 @@
 
 ### STM32 低功耗浮筒传感器固件（技术主线项目）
 
-> 硬件产品固件，源码私有，可在面试中投屏讲解。
+> 硬件产品固件，源码私有
 
 - **STOP 模式 + RTC Alarm 周期唤醒**：以 LSI 驱动的 5 Hz（200 ms）闹钟替代 `HAL_Delay` 阻塞轮询，主循环绝大部分时间停留在 STOP 模式
 - **休眠前后的正确性处理**：进入 STOP 前按固定顺序清 `PWR_FLAG_WU` → 轮询 `RTC->CRL` 的 `RTOFF` → 清 `RTC_CRL_ALRF` → 清 `EXTI->PR` 第 17 位 → 设定下一个闹钟；唤醒后重新执行 `SystemClock_Config()` 恢复 HSI/PLL，再重启 DMA
